@@ -1,4 +1,4 @@
 
 > CHATBOT-API-PHP
 
-Este proyecto es un bot de WhatsApp que utiliza la API de Meta para interactuar con los usuarios. El bot puede responder a mensajes de texto, enviar imágenes, documentos, ubicaciones y más.
+This project is a WhatsApp bot that uses the Meta API to interact with users. The bot can respond to text messages, send images, documents, locations, and more.
