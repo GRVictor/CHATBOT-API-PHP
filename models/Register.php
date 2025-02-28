@@ -9,13 +9,13 @@
             $sql->bindValue(1, $log_number);
             $sql->bindValue(2, $log_text);
 
-            error_log("insert_register - log_number: $log_number, log_text: $log_text");
+            // error_log("insert_register - log_number: $log_number, log_text: $log_text");
 
             try {
                 $sql->execute();
-                error_log("insert_register - Data inserted successfully");
+                // error_log("insert_register - Data inserted successfully");
             } catch (Exception $e) {
-                error_log("insert_register - Exception: " . $e->getMessage());
+                // error_log("insert_register - Exception: " . $e->getMessage());
             }
         }
 
@@ -27,13 +27,13 @@
             $sql->bindValue(1, $log_ticket);
             $sql->bindValue(2, $log_number);
 
-            error_log("insert_ticket - log_ticket: $log_ticket");
+            // error_log("insert_ticket - log_ticket: $log_ticket");
 
             try {
                 $sql->execute();
-                error_log("insert_ticket - Data inserted successfully");
+                // error_log("insert_ticket - Data inserted successfully");
             } catch (Exception $e) {
-                error_log("insert_ticket - Exception: " . $e->getMessage());
+                // error_log("insert_ticket - Exception: " . $e->getMessage());
             }
         }
 

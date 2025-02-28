@@ -50,7 +50,7 @@
                             $number = $messages['from'];
                             $number = preg_replace('/^(\d{2,3})1/', '$1', $number);
 
-                            error_log("receiveMessages - Button Reply: Comment: $comment, Number: $number"); // Comment out for debugging
+                            // error_log("receiveMessages - Button Reply: Comment: $comment, Number: $number"); // Comment out for debugging
 
                             SendMessageWhatsApp($comment,$number);
 
@@ -100,6 +100,8 @@
     }
 
     function notifyAgent($number, $random) {
+        // error_log("notifyAgent - Number: $number, Random: $random"); // Registro de depuración
+    
         $data = json_encode([
             "messaging_product" => "whatsapp",
             "recipient_type" => "individual",
@@ -110,6 +112,26 @@
                 "body" => "El cliente con número: " .  $number . ". Y número de folio: " . $random . " ha solicitado hablar con un asesor, por favor contáctalo."
             )
         ]);
+    
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAsAgN9ei0YBO00GBk3FNpXZBDKtWSPBF95KGU1ymjcZBf1DG2XvgFsndP06Jk9XjLmXOlwwN1kaZB9CrovmZAwExzvK4dnuIY5Xa6ZCus1ecDrFi97ZCo1hMYjrnZBgdZCZAHZBa9f5lgRFzZBRZCCGUfK4dZAM1Xa9cNol6ZBGt43uUvbZC3vwDNN34bdMZCOX3YqNApuJq5Yu4MgPiaOfJ0ZBg9FadT6LMXFwZD\r\n",
+                'content' => $data,
+                'ignore_errors' => true
+            ]
+        ];
+    
+        $context = stream_context_create($options);
+        $response = file_get_contents('https://graph.facebook.com/v22.0/510747558798423/messages', false, $context);
+    
+        if ($response === false) {
+            error_log("notifyAgent - Error al enviar el mensaje");
+            echo "Error al enviar el mensaje\n";
+        } else {
+            error_log("notifyAgent - Mensaje enviado correctamente");
+            echo "Mensaje enviado correctamente\n";
+        }
     }
 
     function SendMessageWhatsApp($comment,$number){
